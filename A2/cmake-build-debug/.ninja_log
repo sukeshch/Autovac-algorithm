@@ -1,0 +1,13 @@
+# ninja log v5
+2	136	1678746491687256214	A2	d201b346b2782d18
+6	186	1678746086399529723	CMakeFiles/A2.dir/Simulation/WallSensor.cpp.o	a2cdac50317c86b6
+5	414	1678746086628149217	CMakeFiles/A2.dir/main.cpp.o	955cf3f6c7cf8a1b
+5	188	1678746086403808690	CMakeFiles/A2.dir/Simulation/MyBatteryMeter.cpp.o	79b23afb04467022
+5	203	1678746086419059042	CMakeFiles/A2.dir/Algorithm/MyAlgorithm.cpp.o	b9ff29c60fdac258
+0	63	1678747137181786850	build.ninja	9159a5a656a6e1ef
+6	186	1678746086399576388	CMakeFiles/A2.dir/Simulation/MyDirtSensor.cpp.o	b89e74d884d84e56
+6	188	1678746086404375460	CMakeFiles/A2.dir/Simulation/Simulator.cpp.o	f4521dd54588ca34
+0	61	1678747137181786850	build.ninja	9159a5a656a6e1ef
+2	170	1678747137359871967	CMakeFiles/A2.dir/Algorithm/MyAlgorithm.cpp.o	b9ff29c60fdac258
+2	380	1678747137569958795	CMakeFiles/A2.dir/main.cpp.o	955cf3f6c7cf8a1b
+380	423	1678747137614524188	A2	5419350128fcbc56
