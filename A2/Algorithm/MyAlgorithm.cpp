@@ -5,7 +5,6 @@
 #include "MyAlgorithm.h"
 
 Step MyAlgorithm::nextStep() {
-    /* TODO : Add your logic */
-    return Step::Finish;
+  /* TODO : Add your logic */
+  return Step::Finish;
 }
-
