@@ -8,8 +8,9 @@ private:
   int steps_to_full_charge_;
 
 public:
-  RobotState(int max_battery_steps);
+  RobotState();
   ~RobotState();
+  void init(double battery);
   double maxBattery() const;
   double battery() const;
   void step();

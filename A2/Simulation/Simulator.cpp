@@ -1,8 +1,8 @@
 #include "Simulator.h"
 
 Simulator::Simulator()
-    : house_(std::make_shared<House>()), dirt_sensor(house_),
-      walls_sensor(house_), battery_meter(house_) {}
+    : house_(std::make_shared<House>()), robot_(std::make_shared<RobotState>()),
+      dirt_sensor(house_), walls_sensor(house_), battery_meter(house_) {}
 
 void Simulator::setAlgorithm(AbstractAlgorithm &algorithm) {
 
@@ -68,8 +68,9 @@ int Simulator::readHouseFile(const std::string &houseFilePath) {
     myfile >> line;
     row_number++;
   }
-  house_ = std::make_shared<House>(data);
-  robot_ = std::make_shared<RobotState>(max_robot_battery_);
+  // house_ = std::make_shared<House>(data);
+  house_->init(data);
+  robot_->init(max_robot_battery_);
   std::cout << "House:\n";
   std::cout << *house_;
 }
