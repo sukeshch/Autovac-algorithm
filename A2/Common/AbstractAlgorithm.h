@@ -9,8 +9,8 @@
 #include "WallsSensor.h"
 #include "common_types.h"
 #include <cstdlib>
-// #include <iostream>
-// #include <memory>
+#include <iostream>
+#include <memory>
 
 class AbstractAlgorithm {
 
