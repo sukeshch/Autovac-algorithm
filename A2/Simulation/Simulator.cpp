@@ -1,29 +1,31 @@
 #include "Simulator.h"
 
-Simulator::Simulator() {}
+Simulator::Simulator() : house_(std::make_shared<House>()) {}
 
 void Simulator::setAlgorithm(AbstractAlgorithm &algorithm) {
-  if (!wall || !dirt || !battery) {
+  if (!wall_sensor.get() || !dirt_sensor.get() || !battery_meter.get()) {
     std::cout << "ERROR!! SETTING ALGORITHM BEFORE SENSORS INITIALIZATION"
               << std::endl;
   }
-  algo = &algorithm;
-  algo->setMaxSteps(max_steps_);
-  algo->setWallsSensor(*wall);
-  algo->setDirtSensor(*dirt);
-  algo->setBatteryMeter(*battery);
+  algo_t = &algorithm;
+  // algo = std::make_unique<MyAlgorithm>();
+  //  algo->setMaxSteps(max_steps_);
+  //   algo->setWallsSensor(*wall_sensor);
+  //   algo->setDirtSensor(*dirt_sensor);
+  //   algo->setBatteryMeter(*battery_meter);
 }
-
-int Simulator::initSensors() { return -1; }
+// call init sensors only after readHouseFile?
+int Simulator::initSensors() {
+  // TODO: verify if shared or unique
+  wall_sensor = std::make_shared<WallsSensorImpl>();
+  return -1;
+}
 
 void Simulator::readHouseFile(const std::string &houseFilePath) {
   // TODO : Consider moving this function to cpp
-  if (initSensors() == -1) {
-    std::cout << "ERROR INITIALIZING SENSORS" << std::endl;
-  }
 }
 
 void Simulator::run() {
   // TODO : Implement run() using the following function
-  algo->nextStep();
+  // algo->nextStep();
 }

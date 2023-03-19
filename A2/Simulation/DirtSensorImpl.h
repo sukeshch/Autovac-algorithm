@@ -3,6 +3,7 @@
 #include "../Common/DirtSensor.h"
 #include "../Common/common_types.h"
 #include "House.h"
+#include <memory>
 
 class DirtSensorImpl : DirtSensor {
 private:

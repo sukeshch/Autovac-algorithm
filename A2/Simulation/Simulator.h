@@ -4,17 +4,25 @@
 
 #pragma once
 
+#include "../Algorithm/MyAlgorithm.h"
 #include "../Common/AbstractAlgorithm.h"
+#include "BatteryMeterImpl.h"
+#include "DirtSensorImpl.h"
+#include "WallsSensorImpl.h"
+#include <iostream>
 
 class Simulator { // : public WallsSensor, public DirtSensor, public
                   // BatteryMeter {
 private:
-  AbstractAlgorithm *algo = nullptr;
-  DirtSensor *dirt = nullptr;
-  // std::shared_ptr<DirtSensor> dirt_sensor;
-  WallsSensor *wall = nullptr;
-  BatteryMeter *battery = nullptr;
+  // cannot directly instanciate abstract algorithm, so using smart pointers
+  // std::unique_ptr<MyAlgorithm> algo;
+  AbstractAlgorithm *algo_t;
+  std::shared_ptr<DirtSensor> dirt_sensor;
+  std::shared_ptr<WallsSensorImpl> wall_sensor;
+  std::shared_ptr<BatteryMeter> battery_meter;
   std::size_t max_steps_;
+  std::shared_ptr<House> house_;
+  // std::shared_ptr<RobotState> robot_;
   int initSensors();
 
 public:
