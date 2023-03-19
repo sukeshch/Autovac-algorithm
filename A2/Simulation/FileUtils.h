@@ -9,9 +9,7 @@
  * If the file is invalid you can reject it and print the reason to screen
  */
 class FileUtils {
-private:
-  double parseDouble(std::string input);
-
 public:
+  static double parseDouble(std::string input);
   size_t readAEqb(std::string input, std::string varname);
 };
