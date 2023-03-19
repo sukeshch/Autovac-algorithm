@@ -1,5 +1,7 @@
 #pragma once
 #include "../Common/common_types.h"
+#include <ostream>
+#include <string>
 #include <vector>
 class House {
 private:
@@ -8,5 +10,6 @@ private:
 
 public:
   House() {}
-  void init(std::vector<std::vector<int>> &, Position &dock_pos);
+  void init(std::vector<std::vector<int>> &);
+  friend std::ostream &operator<<(std::ostream &out, const House &h);
 };

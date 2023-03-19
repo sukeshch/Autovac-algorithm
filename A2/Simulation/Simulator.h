@@ -8,7 +8,10 @@
 #include "../Common/AbstractAlgorithm.h"
 #include "BatteryMeterImpl.h"
 #include "DirtSensorImpl.h"
+#include "FileUtils.h"
+#include "RobotState.h"
 #include "WallsSensorImpl.h"
+#include <fstream>
 #include <iostream>
 
 class Simulator { // : public WallsSensor, public DirtSensor, public
@@ -16,18 +19,24 @@ class Simulator { // : public WallsSensor, public DirtSensor, public
 private:
   // cannot directly instanciate abstract algorithm, so using smart pointers
   // std::unique_ptr<MyAlgorithm> algo;
-  AbstractAlgorithm *algo_t;
-  std::shared_ptr<DirtSensor> dirt_sensor;
-  std::shared_ptr<WallsSensorImpl> wall_sensor;
-  std::shared_ptr<BatteryMeter> battery_meter;
+  AbstractAlgorithm *algo;
+
+  DirtSensorImpl dirt_sensor;
+  WallsSensorImpl walls_sensor;
+  BatteryMeterImpl battery_meter;
+
+  // DirtSensor *dirt_sensor;
+  // WallsSensor *wall_sensor;
+  // BatteryMeter *battery_meter;
+
   std::size_t max_steps_;
   std::shared_ptr<House> house_;
-  // std::shared_ptr<RobotState> robot_;
+  std::shared_ptr<RobotState> robot_;
   int initSensors();
 
 public:
   Simulator();
-  void readHouseFile(const std::string &house_file_path);
+  int readHouseFile(const std::string &house_file_path);
   void setAlgorithm(AbstractAlgorithm &algorithm);
   void run();
 
