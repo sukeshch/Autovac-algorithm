@@ -25,8 +25,6 @@ void Simulator::setAlgorithm(AbstractAlgorithm &algorithm) {
   BatteryMeter *bm = (BatteryMeter *)battery_meter.get();
   algo->setBatteryMeter(*bm);
 }
-// required?
-int Simulator::initSensors() { return -1; }
 
 int Simulator::readHouseFile(const std::string &houseFilePath) {
   // populate house_ structure here
@@ -54,10 +52,10 @@ int Simulator::readHouseFile(const std::string &houseFilePath) {
             << num_rows_s << std::endl
             << num_cols_s << std::endl;
 
-  max_steps_ = FileUtils::parseDouble(max_steps_s);
-  int max_robot_battery_ = FileUtils::parseDouble(max_battery_s);
-  int n_rows_ = FileUtils::parseDouble(num_rows_s);
-  int n_cols_ = FileUtils::parseDouble(num_cols_s);
+  max_steps_ = Utils::parseDouble(max_steps_s);
+  int max_robot_battery_ = Utils::parseDouble(max_battery_s);
+  int n_rows_ = Utils::parseDouble(num_rows_s);
+  int n_cols_ = Utils::parseDouble(num_cols_s);
 
   std::cout << max_steps_ << std::endl
             << max_robot_battery_ << std::endl

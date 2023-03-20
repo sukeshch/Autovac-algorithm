@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Common/common_types.h"
+#include "Utils.h"
 #include <algorithm>
 
 class RobotState {
@@ -8,6 +9,7 @@ private:
   double max_battery_;
   double battery_ = 0;
   int steps_to_full_charge_;
+  Position robot_pos_;
 
 public:
   RobotState();
@@ -17,4 +19,6 @@ public:
   double battery() const;
   void step();
   void charge();
+
+  Position getPosition() const;
 };

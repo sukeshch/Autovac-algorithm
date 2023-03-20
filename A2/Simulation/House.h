@@ -1,5 +1,6 @@
 #pragma once
 #include "../Common/common_types.h"
+#include "Utils.h"
 #include <ostream>
 #include <string>
 #include <vector>
@@ -10,6 +11,8 @@ private:
 
 public:
   House() {}
+  int dirtLevel(const Position &position) const;
+  bool isWall(const Position &position) const;
   void init(std::vector<std::vector<int>> &);
   friend std::ostream &operator<<(std::ostream &out, const House &h);
 };

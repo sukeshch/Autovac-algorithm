@@ -3,7 +3,8 @@
 
 using std::string;
 
-double Utils::parseDouble(string input) {
+double Utils::parseDouble(string str) {
+  std::string input = str.substr(str.find('=') + 1);
   if (input.empty())
     return (size_t)FileReadError::Invalid;
 
@@ -34,4 +35,19 @@ size_t Utils::readAEqb(string input, string varname) {
 
   // handle val < 0 at caller
   return parseDouble(valString);
+}
+
+Direction reverse(Direction d) {
+  switch (d) {
+  case Direction::North:
+    return Direction::South;
+  case Direction::South:
+    return Direction::North;
+  case Direction::West:
+    return Direction::East;
+  case Direction::East:
+    return Direction::West;
+  default:
+    return Direction::West;
+  }
 }

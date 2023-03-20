@@ -17,7 +17,7 @@ set(SIM_INCLUDES
     ${PROJECT_SOURCE_DIR}/Simulation/WallsSensorImpl.h
     ${PROJECT_SOURCE_DIR}/Simulation/DirtSensorImpl.h
     ${PROJECT_SOURCE_DIR}/Simulation/House.h
-    ${PROJECT_SOURCE_DIR}/Simulation/FileUtils.h
+    ${PROJECT_SOURCE_DIR}/Simulation/Utils.h
     ${PROJECT_SOURCE_DIR}/Simulation/Simulator.h
     ${PROJECT_SOURCE_DIR}/Simulation/RobotState.h
     )
@@ -33,7 +33,7 @@ add_library(sim SHARED
     ${PROJECT_SOURCE_DIR}/Simulation/House.cpp
     ${PROJECT_SOURCE_DIR}/Simulation/Simulator.cpp
     ${PROJECT_SOURCE_DIR}/Simulation/RobotState.cpp
-    ${PROJECT_SOURCE_DIR}/Simulation/FileUtils.cpp
+    ${PROJECT_SOURCE_DIR}/Simulation/Utils.cpp
     )
 target_include_directories(sim PUBLIC ${COMMON_INCLUDES} ${SIM_INCLUDES})
 

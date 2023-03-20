@@ -22,3 +22,5 @@ void RobotState::charge() {
   battery_ += max_battery_ / steps_to_full_charge_;
   battery_ = std::min(battery_, max_battery_);
 }
+
+Position RobotState::getPosition() const { return robot_pos_; }

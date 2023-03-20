@@ -1,3 +1,5 @@
 #include "DirtSensorImpl.h"
 
-int DirtSensorImpl::dirtLevel() const { return 0; }
+int DirtSensorImpl::dirtLevel() const {
+  return house_->dirtLevel(robot_->getPosition());
+}

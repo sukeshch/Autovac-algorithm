@@ -29,6 +29,14 @@ void House::init(std::vector<std::vector<int>> &data) {
   }
 }
 
+int House::dirtLevel(const Position &position) const {
+  return data_[position.r][position.c];
+}
+
+bool House::isWall(const Position &position) const {
+  return data_[position.r][position.c] == -1;
+}
+
 std::ostream &operator<<(std::ostream &out, const House &house) {
   out << "Printing House object: " << std::endl;
   for (int row = 0; row < house.data_.size(); row++) {

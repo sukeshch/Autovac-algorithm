@@ -14,6 +14,7 @@ class MyAlgorithm : public AbstractAlgorithm {
 public:
   MyAlgorithm();
   MyAlgorithm(AbstractAlgorithm &algorithm);
+
   void setMaxSteps(std::size_t maxSteps) override;
   void setWallsSensor(const WallsSensor &walls_sensor) override;
   void setDirtSensor(const DirtSensor &dirt_sensor) override;

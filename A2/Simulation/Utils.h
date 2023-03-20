@@ -13,3 +13,22 @@ public:
   static double parseDouble(std::string input);
   size_t readAEqb(std::string input, std::string varname);
 };
+struct Position {
+  int r, c;
+  Position next(const Direction &d) {
+    switch (d) {
+    case Direction::North:
+      return {r - 1, c};
+    case Direction::South:
+      return {r + 1, c};
+    case Direction::West:
+      return {r, c - 1};
+    case Direction::East:
+      return {r, c + 1};
+    default:
+      return {r, c};
+    }
+  }
+};
+
+Direction reverse(const Direction &d);
