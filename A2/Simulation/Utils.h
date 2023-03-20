@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Common/common_types.h"
-
+#include <iostream>
 #include <string>
 
 /**
@@ -31,4 +31,5 @@ struct Position {
   }
 };
 
+std::ostream &operator<<(std::ostream &out, const Position &pos);
 Direction reverse(const Direction &d);

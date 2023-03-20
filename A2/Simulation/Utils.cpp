@@ -36,7 +36,10 @@ size_t Utils::readAEqb(string input, string varname) {
   // handle val < 0 at caller
   return parseDouble(valString);
 }
-
+std::ostream &operator<<(std::ostream &out, const Position &pos) {
+  out << "(" << pos.r << "," << pos.c << ")";
+  return out;
+}
 Direction reverse(Direction d) {
   switch (d) {
   case Direction::North:

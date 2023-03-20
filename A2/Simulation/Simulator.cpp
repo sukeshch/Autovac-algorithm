@@ -91,7 +91,7 @@ int Simulator::readHouseFile(const std::string &houseFilePath) {
   }
 
   house_->init(data);
-  robot_->init(max_robot_battery_);
+  robot_->init(max_robot_battery_, house_->getDockPos());
   std::cout << "Robot: max_robot_battery:" << max_robot_battery_ << std::endl;
   std::cout << "House:\n";
   std::cout << *house_;
@@ -101,5 +101,5 @@ int Simulator::readHouseFile(const std::string &houseFilePath) {
 
 void Simulator::run() {
   // TODO : Implement run() using the following function
-  // algo->nextStep();
+  algo->nextStep();
 }

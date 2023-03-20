@@ -22,5 +22,13 @@ void MyAlgorithm::setBatteryMeter(const BatteryMeter &battery_meter) {
 
 Step MyAlgorithm::nextStep() {
   /* TODO : Add your logic */
+  std::cout << "Debug:";
+  if (walls_sensor_)
+    std::cout << 1 << std::endl;
+  else
+    std::cout << 0 << std::endl;
+  // causes seg fault if below statement run TODO: fix this
+  // std::cout << walls_sensor_->isWall(Direction::East) << std::endl;
+
   return Step::Finish;
 }

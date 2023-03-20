@@ -29,11 +29,16 @@ void House::init(std::vector<std::vector<int>> &data) {
   }
 }
 
+Position House::getDockPos() const { return dock_pos_; }
+
 int House::dirtLevel(const Position &position) const {
   return data_[position.r][position.c];
 }
 
 bool House::isWall(const Position &position) const {
+  std::cout << "R:" << data_.size();
+  if (data_.size() > 0)
+    std::cout << "C:" << data_[0].size() << std::endl;
   return data_[position.r][position.c] == -1;
 }
 

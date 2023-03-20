@@ -11,6 +11,7 @@ private:
 
 public:
   House() {}
+  Position getDockPos() const;
   int dirtLevel(const Position &position) const;
   bool isWall(const Position &position) const;
   void init(std::vector<std::vector<int>> &);

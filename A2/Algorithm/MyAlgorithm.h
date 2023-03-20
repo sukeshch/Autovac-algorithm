@@ -5,6 +5,7 @@
 #pragma once
 
 #include "../Common/AbstractAlgorithm.h"
+#include "iostream"
 class MyAlgorithm : public AbstractAlgorithm {
   std::size_t maxSteps;
   const WallsSensor *walls_sensor_ = nullptr;

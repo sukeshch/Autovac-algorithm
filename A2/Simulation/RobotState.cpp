@@ -4,9 +4,10 @@ RobotState::RobotState() {}
 
 RobotState::~RobotState() {}
 
-void RobotState::init(double battery) {
+void RobotState::init(double battery, Position position) {
   battery_ = max_battery_ = battery;
   steps_to_full_charge_ = 20;
+  robot_pos_ = position;
 }
 
 double RobotState::maxBattery() const { return max_battery_; }

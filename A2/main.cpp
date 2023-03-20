@@ -10,5 +10,6 @@ int main(int argc, char **argv) {
   sim.readHouseFile(argv[1]);
   MyAlgorithm algo;
   sim.setAlgorithm(algo);
-  //  sim.run();
+
+  sim.run();
 }

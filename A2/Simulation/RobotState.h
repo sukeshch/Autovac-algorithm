@@ -14,7 +14,7 @@ private:
 public:
   RobotState();
   ~RobotState();
-  void init(double battery);
+  void init(double battery, Position position);
   double maxBattery() const;
   double battery() const;
   void step();
