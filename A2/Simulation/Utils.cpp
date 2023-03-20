@@ -1,13 +1,9 @@
-#include "FileUtils.h"
+#include "Utils.h"
 #include "ErrorCodes.h"
-#include <iostream>
 
 using std::string;
 
-double FileUtils::parseDouble(string str) {
-
-  std::string input = str.substr(str.find('=') + 1);
-
+double Utils::parseDouble(string input) {
   if (input.empty())
     return (size_t)FileReadError::Invalid;
 
@@ -20,6 +16,7 @@ double FileUtils::parseDouble(string str) {
                            [](unsigned char ch) { return !std::isspace(ch); })
                   .base(),
               input.end());
+
   try {
     return std::stod(input);
   } catch (...) {
@@ -27,7 +24,7 @@ double FileUtils::parseDouble(string str) {
   }
 }
 
-size_t FileUtils::readAEqb(string input, string varname) {
+size_t Utils::readAEqb(string input, string varname) {
   string valString = input.substr(input.find('=') + 1);
 
   // TODO:

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Common/common_types.h"
 #include <algorithm>
 

@@ -21,9 +21,9 @@ private:
   // std::unique_ptr<MyAlgorithm> algo;
   AbstractAlgorithm *algo;
 
-  DirtSensorImpl dirt_sensor;
-  WallsSensorImpl walls_sensor;
-  BatteryMeterImpl battery_meter;
+  std::unique_ptr<DirtSensorImpl> dirt_sensor;
+  std::unique_ptr<WallsSensorImpl> walls_sensor;
+  std::unique_ptr<BatteryMeterImpl> battery_meter;
 
   // DirtSensor *dirt_sensor;
   // WallsSensor *wall_sensor;

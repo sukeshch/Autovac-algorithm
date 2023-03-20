@@ -27,8 +27,6 @@ void House::init(std::vector<std::vector<int>> &data) {
       }
     }
   }
-
-  data_ = data;
 }
 
 std::ostream &operator<<(std::ostream &out, const House &house) {
