@@ -6,12 +6,13 @@
 #include "RobotState.h"
 #include <memory>
 
-class DirtSensorImpl : DirtSensor {
+class DirtSensorImpl : public DirtSensor {
 private:
   std::shared_ptr<House> house_;
   std::shared_ptr<RobotState> robot_;
 
 public:
-  DirtSensorImpl(std::shared_ptr<House> house) : house_(house) {}
+  DirtSensorImpl(std::shared_ptr<House> house,
+                 std::shared_ptr<RobotState> robot);
   int dirtLevel() const override;
 };

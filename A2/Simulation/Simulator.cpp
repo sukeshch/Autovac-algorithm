@@ -4,8 +4,8 @@ Simulator::Simulator() {
   house_ = std::make_shared<House>();
   robot_ = std::make_shared<RobotState>();
 
-  dirt_sensor = std::make_unique<DirtSensorImpl>(house_);
-  walls_sensor = std::make_unique<WallsSensorImpl>(house_);
+  dirt_sensor = std::make_unique<DirtSensorImpl>(house_, robot_);
+  walls_sensor = std::make_unique<WallsSensorImpl>(house_, robot_);
   battery_meter = std::make_unique<BatteryMeterImpl>(robot_);
 }
 
@@ -18,12 +18,9 @@ void Simulator::setAlgorithm(AbstractAlgorithm &algorithm) {
   algo = &algorithm;
   algo->setMaxSteps(max_steps_);
 
-  DirtSensor *ds = (DirtSensor *)dirt_sensor.get();
-  algo->setDirtSensor(*ds);
-  WallsSensor *ws = (WallsSensor *)walls_sensor.get();
-  algo->setWallsSensor(*ws);
-  BatteryMeter *bm = (BatteryMeter *)battery_meter.get();
-  algo->setBatteryMeter(*bm);
+  algo->setDirtSensor(*dirt_sensor);
+  algo->setWallsSensor(*walls_sensor);
+  algo->setBatteryMeter(*battery_meter);
 }
 
 int Simulator::readHouseFile(const std::string &houseFilePath) {

@@ -5,10 +5,14 @@
 #pragma once
 
 #include "../Common/AbstractAlgorithm.h"
-#include "iostream"
+#include "../Simulation/DirtSensorImpl.h"
+#include <iostream>
+#include <memory>
 class MyAlgorithm : public AbstractAlgorithm {
   std::size_t maxSteps;
   const WallsSensor *walls_sensor_ = nullptr;
+
+  // std::shared_ptr<DirtSensorImpl> ds_;
   const DirtSensor *dirt_sensor_ = nullptr;
   const BatteryMeter *battery_meter_ = nullptr;
 

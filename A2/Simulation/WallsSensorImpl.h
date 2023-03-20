@@ -8,13 +8,13 @@
 #include <iostream>
 #include <memory>
 
-class WallsSensorImpl : WallsSensor {
+class WallsSensorImpl : public WallsSensor {
 private:
   std::shared_ptr<House> house_;
   std::shared_ptr<RobotState> robot_;
 
 public:
   WallsSensorImpl();
-  WallsSensorImpl(std::shared_ptr<House>);
+  WallsSensorImpl(std::shared_ptr<House>, std::shared_ptr<RobotState>);
   bool isWall(Direction d) const override;
 };

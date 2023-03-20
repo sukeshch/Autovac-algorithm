@@ -1,8 +1,8 @@
 #include "WallsSensorImpl.h"
-WallsSensorImpl::WallsSensorImpl(std::shared_ptr<House> house)
-    : house_(house) {}
+
+WallsSensorImpl::WallsSensorImpl(std::shared_ptr<House> house,
+                                 std::shared_ptr<RobotState> robot)
+    : house_(house), robot_(robot) {}
 bool WallsSensorImpl::isWall(Direction direction) const {
-  std::cout << "Current Robot Pos:" << robot_->getPosition().next(direction);
-  return false;
-  // return house_->isWall(robot_->getPosition().next(direction));
+  return house_->isWall(robot_->getPosition().next(direction));
 }
