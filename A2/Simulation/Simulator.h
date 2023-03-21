@@ -21,9 +21,9 @@ private:
   // std::unique_ptr<MyAlgorithm> algo;
   AbstractAlgorithm *algo;
 
-  std::unique_ptr<DirtSensorImpl> dirt_sensor;
-  std::unique_ptr<WallsSensorImpl> walls_sensor;
-  std::unique_ptr<BatteryMeterImpl> battery_meter;
+  // std::unique_ptr<DirtSensorImpl> dirt_sensor;
+  // std::unique_ptr<WallsSensorImpl> walls_sensor;
+  // std::unique_ptr<BatteryMeterImpl> battery_meter;
 
   DirtSensorImpl dirt_sensor_;
   WallsSensorImpl wall_sensor_;
@@ -31,9 +31,7 @@ private:
 
   std::size_t max_steps_;
   House houseState_;
-  std::shared_ptr<House> house_;
   RobotState robotState_;
-  std::shared_ptr<RobotState> robot_;
   int initSensors();
 
 public:
