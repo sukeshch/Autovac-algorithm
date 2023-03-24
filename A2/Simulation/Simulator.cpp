@@ -100,9 +100,11 @@ void Simulator::run() {
               << " Dirt: " << dirt_sensor_.dirtLevel() << std::endl;
     error = false;
     Step currentStep = algo->nextStep();
-    if (currentStep == Step::Finish)
+    stepList += str(currentStep)[0];
+    if (currentStep == Step::Finish) {
+      final_state_ = "FINISHED";
       break;
-    else {
+    } else {
       if (currentStep != Step::Stay &&
           wall_sensor_.isWall(static_cast<Direction>(currentStep))) {
         std::cout << "Running into a wall : unexpected operation";
@@ -110,10 +112,28 @@ void Simulator::run() {
       }
       if (!error) {
         houseState_.clean(robotState_.getPosition());
-        robotState_.step(currentStep);
+        if (currentStep == Step::Stay &&
+            robotState_.getPosition() == houseState_.getDockPos())
+          robotState_.charge();
+        else
+          robotState_.step(currentStep);
       }
     }
     steps++;
     std::cout << currentStep << " " << houseState_.totDirt() << std::endl;
   }
+  steps_ = steps;
+  if (robotState_.battery() == 0)
+    final_state_ = "DEAD";
+  else
+    final_state_ = "WORKING";
+}
+void Simulator::dump(std::string outputFileName) {
+  std::ofstream myfile;
+  myfile.open(outputFileName);
+  myfile << "NumSteps = " << steps_ << std::endl;
+  myfile << "DirtLeft = " << houseState_.totDirt() << std::endl;
+  myfile << "Status = " << final_state_ << std::endl;
+  myfile << stepList << std::endl;
+  myfile.close();
 }
