@@ -1,20 +1,32 @@
 #include "House.h"
 
-void House::init(std::vector<std::vector<int>> &data) {
+int House::clean(const Position &position) {
+  if (position.r >= data_.size() || position.c >= data_[0].size())
+    return -1;
+  int &dirt = data_[position.r][position.c];
+  if (dirt == static_cast<int>(LocType::Wall))
+    return -1;
+  if (dirt > 0) {
+    total_dirt_--;
+    dirt--;
+  }
+  return 1;
+}
 
+void House::init(std::vector<std::vector<int>> &data) {
   data_.resize(data.size() + 2);
   for (int i = 0; i < data_.size(); i++)
     data_[i].resize(data[0].size() + 2, 0);
 
   // Pad with wall
   for (int i = 0; i < data_[0].size(); i++) {
-    data_[0][i] = -1;
-    data_[data_.size() - 1][i] = -1;
+    data_[0][i] = int(LocType::Wall);
+    data_[data_.size() - 1][i] = int(LocType::Wall);
   }
 
   for (int i = 0; i < data_.size(); i++) {
-    data_[i][0] = -1;
-    data_[i][data_[0].size() - 1] = -1;
+    data_[i][0] = int(LocType::Wall);
+    data_[i][data_[0].size() - 1] = int(LocType::Wall);
   }
 
   for (int i = 0; i < data.size(); i++) {
@@ -23,6 +35,8 @@ void House::init(std::vector<std::vector<int>> &data) {
         dock_pos_ = {i + 1, j + 1};
         data_[i + 1][j + 1] = 0;
       } else {
+        if (data[i][j] > 0)
+          total_dirt_ += data[i][j];
         data_[i + 1][j + 1] = data[i][j];
       }
     }
@@ -30,13 +44,18 @@ void House::init(std::vector<std::vector<int>> &data) {
 }
 
 Position House::getDockPos() const { return dock_pos_; }
-
+double House::totDirt() const { return total_dirt_; }
 int House::dirtLevel(const Position &position) const {
-  return data_[position.r][position.c];
+  return data_[position.r][position.c] == int(LocType::Dock)
+             ? -1
+             : data_[position.r][position.c];
 }
 
 bool House::isWall(const Position &position) const {
-  return data_[position.r][position.c] == -1;
+  // std::cout << __FUNCTION__ << " " << position.r << ", " << position.c << " "
+  //           << (data_[position.r][position.c] == int(LocType::Wall))
+  //           << std::endl;
+  return data_[position.r][position.c] == int(LocType::Wall);
 }
 
 std::ostream &operator<<(std::ostream &out, const House &house) {

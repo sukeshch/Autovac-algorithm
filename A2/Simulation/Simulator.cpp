@@ -1,7 +1,7 @@
 #include "Simulator.h"
 
 Simulator::Simulator()
-    : dirt_sensor_(houseState_, robotState_),
+    : robotState_(), dirt_sensor_(houseState_, robotState_),
       wall_sensor_(houseState_, robotState_), battery_meter_(robotState_) {}
 
 void Simulator::setAlgorithm(AbstractAlgorithm &algorithm) {
@@ -40,10 +40,10 @@ int Simulator::readHouseFile(const std::string &houseFilePath) {
             << num_rows_s << std::endl
             << num_cols_s << std::endl;
 
-  max_steps_ = Utils::parseDouble(max_steps_s);
-  int max_robot_battery_ = Utils::parseDouble(max_battery_s);
-  int n_rows_ = Utils::parseDouble(num_rows_s);
-  int n_cols_ = Utils::parseDouble(num_cols_s);
+  max_steps_ = Utils::parseInt(max_steps_s);
+  int max_robot_battery_ = Utils::parseInt(max_battery_s);
+  int n_rows_ = Utils::parseInt(num_rows_s);
+  int n_cols_ = Utils::parseInt(num_cols_s);
 
   std::cout << max_steps_ << std::endl
             << max_robot_battery_ << std::endl
@@ -76,8 +76,10 @@ int Simulator::readHouseFile(const std::string &houseFilePath) {
     }
     std::getline(myfile, line);
     row_number++;
+    if (row_number == n_rows_)
+      break;
   }
-
+  myfile.close();
   houseState_.init(data);
   robotState_.init(max_robot_battery_, houseState_.getDockPos());
   std::cout << "Robot: max_robot_battery:" << max_robot_battery_ << std::endl;
@@ -89,5 +91,29 @@ int Simulator::readHouseFile(const std::string &houseFilePath) {
 
 void Simulator::run() {
   // TODO : Implement run() using the following function
-  algo->nextStep();
+  int steps = 1;
+  bool stop = false, error = true;
+  while (steps <= max_steps_) {
+    std::cout << "Simulator::step " << steps << " pos "
+              << robotState_.getPosition()
+              << " Battery: " << battery_meter_.getBatteryState()
+              << " Dirt: " << dirt_sensor_.dirtLevel() << std::endl;
+    error = false;
+    Step currentStep = algo->nextStep();
+    if (currentStep == Step::Finish)
+      break;
+    else {
+      if (currentStep != Step::Stay &&
+          wall_sensor_.isWall(static_cast<Direction>(currentStep))) {
+        std::cout << "Running into a wall : unexpected operation";
+        error = true;
+      }
+      if (!error) {
+        houseState_.clean(robotState_.getPosition());
+        robotState_.step(currentStep);
+      }
+    }
+    steps++;
+    std::cout << currentStep << " " << houseState_.totDirt() << std::endl;
+  }
 }

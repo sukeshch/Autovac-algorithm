@@ -3,7 +3,7 @@
 
 using std::string;
 
-double Utils::parseDouble(string str) {
+double Utils::parseInt(string str) {
   std::string input = str.substr(str.find('=') + 1);
   if (input.empty())
     return (size_t)FileReadError::Invalid;
@@ -19,7 +19,7 @@ double Utils::parseDouble(string str) {
               input.end());
 
   try {
-    return std::stod(input);
+    return std::stoi(input);
   } catch (...) {
     return (size_t)FileReadError::InvalidValue;
   }
@@ -34,7 +34,7 @@ size_t Utils::readAEqb(string input, string varname) {
   // 3. other scenarios
 
   // handle val < 0 at caller
-  return parseDouble(valString);
+  return parseInt(valString);
 }
 std::ostream &operator<<(std::ostream &out, const Position &pos) {
   out << "(" << pos.r << "," << pos.c << ")";
@@ -53,4 +53,45 @@ Direction reverse(Direction d) {
   default:
     return Direction::West;
   }
+}
+
+Step reverse(Step s) {
+  switch (s) {
+  case Step::North:
+    return Step::South;
+  case Step::South:
+    return Step::North;
+  case Step::West:
+    return Step::East;
+  case Step::East:
+    return Step::West;
+  default:
+    return Step::Stay;
+  }
+}
+
+std::ostream &operator<<(std::ostream &out, const Step &step) {
+  std::string outString = "";
+  switch (step) {
+  case Step::North:
+    outString = "North";
+    break;
+  case Step::South:
+    outString = "South";
+    break;
+  case Step::East:
+    outString = "East";
+    break;
+  case Step::West:
+    outString = "West";
+    break;
+  case Step::Stay:
+    outString = "Stay";
+    break;
+  case Step::Finish:
+    outString = "Finish";
+    break;
+  }
+  out << outString;
+  return out;
 }

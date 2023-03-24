@@ -2,6 +2,7 @@
 
 #include "../Common/common_types.h"
 #include "Utils.h"
+
 #include <algorithm>
 
 class RobotState {
@@ -17,7 +18,7 @@ public:
   void init(double battery, Position position);
   double maxBattery() const;
   double battery() const;
-  void step();
+  void step(Step stepDiretion);
   void charge();
 
   Position getPosition() const;

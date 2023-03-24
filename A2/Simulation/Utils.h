@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Common/common_types.h"
+
 #include <iostream>
 #include <string>
 
@@ -10,20 +11,21 @@
  */
 class Utils {
 public:
-  static double parseDouble(std::string input);
+  static double parseInt(std::string input);
   size_t readAEqb(std::string input, std::string varname);
 };
+
 struct Position {
   int r, c;
-  Position next(const Direction &d) {
+  Position next(const Step &d) {
     switch (d) {
-    case Direction::North:
+    case Step::North:
       return {r - 1, c};
-    case Direction::South:
+    case Step::South:
       return {r + 1, c};
-    case Direction::West:
+    case Step::West:
       return {r, c - 1};
-    case Direction::East:
+    case Step::East:
       return {r, c + 1};
     default:
       return {r, c};
@@ -32,4 +34,7 @@ struct Position {
 };
 
 std::ostream &operator<<(std::ostream &out, const Position &pos);
+std::ostream &operator<<(std::ostream &out, const Step &step);
+
 Direction reverse(const Direction &d);
+Step reverse(Step s);
