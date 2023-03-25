@@ -125,15 +125,16 @@ void Simulator::run() {
   steps_ = steps;
   if (robotState_.battery() == 0)
     final_state_ = "DEAD";
-  else
+  else if (final_state_ == "")
     final_state_ = "WORKING";
 }
 void Simulator::dump(std::string outputFileName) {
   std::ofstream myfile;
   myfile.open(outputFileName);
-  myfile << "NumSteps = " << steps_ << std::endl;
+  myfile << "NumSteps = " << steps_ - 1 << std::endl;
   myfile << "DirtLeft = " << houseState_.totDirt() << std::endl;
   myfile << "Status = " << final_state_ << std::endl;
   myfile << stepList << std::endl;
   myfile.close();
+  std::cout << houseState_;
 }
